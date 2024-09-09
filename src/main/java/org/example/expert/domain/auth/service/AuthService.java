@@ -31,8 +31,14 @@ public class AuthService {
 
         UserRole userRole = UserRole.of(signupRequest.getUserRole());
 
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            throw new InvalidRequestException("이미 존재하는 이메일입니다.");
+        // 중복 여부
+//        if (userRepository.existsByEmail(signupRequest.getEmail())) {
+//            throw new InvalidRequestException("이미 존재하는 이메일입니다.");
+//        }
+
+        // null 확인
+        if (signupRequest.getEmail() == null) {
+            throw new InvalidRequestException("이메일을 확인해주세요.");
         }
 
         User newUser = new User(
